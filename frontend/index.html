@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-mdb-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Calendar</title>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.0.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body class="d-flex flex-column h-100">
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body">
+
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" width="30" height="24" alt="">
+        </a>
+        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="add.html">Add Form</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="about.html">About Us</a>
+            </li>
+          </ul>
+          <form action="" class="d-flex" id="searchForm">
+            <input type="text" class="form-control me-2" type="search" id="searchInput" placeholder="Search..."
+              aria-label="search">
+            <button class="btn btn-outline-primary" type="submit"><i class="fa-solid fa-search"></i></button>
+          </form>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-mdb-dropdown-init
+                data-mdb-ripple-init aria-expanded="false">
+                <i class="fa-solid fa-user-circle"></i>
+              </a>
+              <ul class="dropdown-menu" id="userNavbar" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="login.html">Login</a></li>
+                <li><a class="dropdown-item" href="signup.html">Sign up</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+  </header>
+  <main class="container flex-shrink-0">
+    <h1 class="text-center my-5">Events Blog</h1>
+
+    <!-- Calendar Section -->
+    <div id="calendar" class="row row-cols-7 g-3">
+      <!-- Calendar will be dynamically populated -->
+    </div>
+  </main>
+  <footer class="p-3 mt-auto">
+    <div class="container-fluid text-center">
+      Copyright &copy; 2024 - Su Myat Paing Soe
+    </div>
+  </footer>
+
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.0.0/mdb.umd.min.js"></script>
+  <script src="app.js"></script>
+  <script src="navbar.js"></script>
+  <script>
+
+    // Fetch events and update the calendar when the page loads
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+        let response;
+
+        // Fetch existing events from the API
+        if (searchQuery) {
+          response = await fetch(`${baseURL}/api/events/search?q=${searchQuery}`);
+        } else {
+          response = await fetch(`${baseURL}/api/events/xml`);
+        }
+
+        const str = await response.text();
+
+        // Update the calendar UI to show the events
+        await updateCalendarUI(str);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+        const calendarContainer = document.getElementById('calendar');
+        calendarContainer.innerHTML = '<h1 style="color: #ed3f28;">Something went wrong</h1>'; // Clear the existing calendar
+
+      }
+    });
+  </script>
+</body>
+
+</html>

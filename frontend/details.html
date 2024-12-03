@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-mdb-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Calendar</title>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.0.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body class="d-flex flex-column h-100">
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body">
+
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" width="30" height="24" alt="">
+        </a>
+        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="add.html">Add Form</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="about.html">About Us</a>
+            </li>
+          </ul>
+          <form action="" class="d-flex" id="searchForm">
+            <input type="text" class="form-control me-2" type="search" id="searchInput" placeholder="Search..."
+              aria-label="search">
+            <button class="btn btn-outline-primary" type="submit"><i class="fa-solid fa-search"></i></button>
+          </form>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-mdb-dropdown-init
+                data-mdb-ripple-init aria-expanded="false">
+                <i class="fa-solid fa-user-circle"></i>
+              </a>
+              <ul class="dropdown-menu" id="userNavbar" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="login.html">Login</a></li>
+                <li><a class="dropdown-item" href="signup.html">Sign up</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+  </header>
+  <main class="container flex-shrink-0">
+    <img class="my-5 d-block mx-auto w-75" id="event-image" src="" alt="DUmmy">
+    <p id="photo-credit"></p>
+    <a id="addToGoogleCalendar" class="btn btn-primary" target="_blank">
+      Add to Google Calendar <i class="fa-regular fa-calendar-days"></i>
+    </a>
+    <h1 class="mb-3">Even Title</h1>
+    <p class="text-muted" id="event-date"></p>
+    <p id="event-description"></p>
+    <h4>Location</h4>
+    <div id="googleMap" class="mx-auto" style="width:80%;height:400px;"></div>
+  </main>
+  <footer class="p-3 mt-auto">
+    <div class="container-fluid text-center">
+      Copyright &copy; 2024 - Su Myat Paing Soe
+    </div>
+  </footer>
+
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.0.0/mdb.umd.min.js"></script>
+  <script src="app.js"></script>
+  <script src="navbar.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMBc7ZEjThH4cl8RmQ55pbxkndOM-BweA&loading=async"></script>
+  <script>
+    let eventData = null;
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+
+      document.getElementById("googleMap").innerText = 'Loading...';
+
+      if (id) {
+        try {
+          const response = await fetch(`${baseURL}/api/events/xml?id=${id}`);
+
+          if (!response.ok) {
+            throw new Error('Event Not Found!');
+          }
+
+          eventData = await response.json();
+
+          const title = eventData.title[0];
+          const date = eventData.date[0];
+          const description = eventData.description[0];
+          const location = eventData.location[0];
+
+          document.querySelector('h1').innerText = title;
+          document.getElementById('event-date').innerText = new Date(date).toDateString();
+          document.getElementById('event-description').innerText = description;
+
+          // Generate Google Calendar URL
+          const startDate = new Date(date).toISOString().replace(/-|:|\.\d+/g, "");
+          const endDate = new Date(new Date(date).getTime() + 2 * 60 * 60 * 1000) // 2 hours duration
+            .toISOString()
+            .replace(/-|:|\.\d+/g, "");
+
+          const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
+
+          // Set the link for "Add to Google Calendar"
+          document.getElementById('addToGoogleCalendar').href = googleCalendarUrl;
+
+          const imgResponse = await fetch(`${baseURL}/api/photos?query=${location}`);
+          const data = await imgResponse.json();
+          console.log(data);
+          const imageUrl = data.urls.full; // Get image URL
+
+          document.getElementById('event-image').src = imageUrl;
+          document.getElementById('event-image').alt = `${location}`;
+
+
+
+          setTimeout(() => {
+            myMap();
+          }, 1000);
+        } catch (e) {
+          console.error(e);
+          document.querySelector('h1').innerText = "Error finding Event!";
+        }
+      } else {
+        console.error(e);
+        document.querySelector('h1').innerText = "Error finding Event!";
+      }
+    });
+
+    function myMap() {
+      var mapProp = {
+        center: new google.maps.LatLng(eventData.latitude, eventData.longitude),
+        zoom: 15
+      };
+      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+      map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+
+      var location = new google.maps.LatLng(eventData.latitude, eventData.longitude);
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<events>
+  <event>
+    <id>1</id>
+    <title>Taylor Swift: The Eras Tour</title>
+    <date>2024-11-14</date>
+    <time>19:00</time>
+    <description>Taylor Swift performs live as part of The Eras Tour.</description>
+    <location>Rogers Centre, Toronto, ON, Canada</location>
+    <latitude>43.641839</latitude>
+    <longitude>-79.389503</longitude>
+  </event>
+  <event>
+    <id>2</id>
+    <title>Distillery Winter Village</title>
+    <date>2024-11-16</date>
+    <time>10:00</time>
+    <description>A festive market with local vendors and holiday-themed activities.</description>
+    <location>Distillery District, Toronto, ON, Canada</location>
+    <latitude>43.650313</latitude>
+    <longitude>-79.359497</longitude>
+  </event>
+  <event>
+    <id>3</id>
+    <title>Toronto Game Expo</title>
+    <date>2024-11-16</date>
+    <time>11:00</time>
+    <description>A vast collection of retro and modern games, tournaments, and more.</description>
+    <location>Queen Elizabeth Building, Exhibition Place, Toronto, ON, Canada</location>
+    <latitude>43.632527</latitude>
+    <longitude>-79.414438</longitude>
+  </event>
+  <event>
+    <id>4</id>
+    <title>Mariah Carey: Merry Christmas One And All</title>
+    <date>2024-11-17</date>
+    <time>20:00</time>
+    <description>Mariah Carey performs holiday classics live in concert.</description>
+    <location>Scotiabank Arena, Toronto, ON, Canada</location>
+    <latitude>43.643466</latitude>
+    <longitude>-79.379099</longitude>
+  </event>
+  <event>
+    <id>5</id>
+    <title>Toronto Maple Leafs vs. Ottawa Senators</title>
+    <date>2024-11-12</date>
+    <time>19:00</time>
+    <description>Toronto Maple Leafs face off against Ottawa Senators in the NHL.</description>
+    <location>Scotiabank Arena, Toronto, ON, Canada</location>
+    <latitude>43.643466</latitude>
+    <longitude>-79.379099</longitude>
+  </event>
+  <event>
+    <id>6</id>
+    <title>Toronto Christmas Market</title>
+    <date>2024-11-18</date>
+    <time>12:00</time>
+    <description>Annual Christmas Market with holiday decor, food, and shopping.</description>
+    <location>Distillery District, Toronto, ON, Canada</location>
+    <latitude>43.650313</latitude>
+    <longitude>-79.359497</longitude>
+  </event>
+  <event>
+    <id>7</id>
+    <title>Royal Ontario Museum: Friday Night Live</title>
+    <date>2024-11-22</date>
+    <time>19:00</time>
+    <description>Experience the ROM with music, food, and cultural exhibitions.</description>
+    <location>Royal Ontario Museum, Toronto, ON, Canada</location>
+    <latitude>43.667710</latitude>
+    <longitude>-79.394777</longitude>
+  </event>
+  <event>
+    <id>8</id>
+    <title>Toronto International Ballet Gala</title>
+    <date>2024-11-25</date>
+    <time>19:30</time>
+    <description>An evening of ballet performances featuring international artists.</description>
+    <location>Meridian Hall, Toronto, ON, Canada</location>
+    <latitude>43.647083</latitude>
+    <longitude>-79.374512</longitude>
+  </event>
+  <event>
+    <id>9</id>
+    <title>Toronto Raptors vs. Golden State Warriors</title>
+    <date>2024-11-26</date>
+    <time>19:30</time>
+    <description>NBA game featuring the Toronto Raptors and Golden State Warriors.</description>
+    <location>Scotiabank Arena, Toronto, ON, Canada</location>
+    <latitude>43.643466</latitude>
+    <longitude>-79.379099</longitude>
+  </event>
+  <event>
+    <id>10</id>
+    <title>Toronto Santa Claus Parade</title>
+    <date>2024-11-24</date>
+    <time>12:30</time>
+    <description>Annual parade with festive floats, performers, and Santa Claus.</description>
+    <location>Downtown Toronto, ON, Canada</location>
+    <latitude>43.651070</latitude>
+    <longitude>-79.347015</longitude>
+  </event>
+  <event>
+    <id>11</id>
+    <title>AGO Art Bash</title>
+    <date>2024-11-29</date>
+    <time>18:00</time>
+    <description>A fundraising event at the Art Gallery of Ontario featuring exclusive art exhibits.</description>
+    <location>Art Gallery of Ontario, Toronto, ON, Canada</location>
+    <latitude>43.653607</latitude>
+    <longitude>-79.392512</longitude>
+  </event>
+  <event>
+    <id>12</id>
+    <title>Ice Skating at Nathan Phillips Square</title>
+    <date>2024-11-30</date>
+    <time>10:00</time>
+    <description>Seasonal outdoor ice skating at Toronto's iconic Nathan Phillips Square.</description>
+    <location>Nathan Phillips Square, Toronto, ON, Canada</location>
+    <latitude>43.652620</latitude>
+    <longitude>-79.383387</longitude>
+  </event>
+</events>

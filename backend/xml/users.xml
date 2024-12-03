@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+  <user>
+    <name>dd</name>
+    <email>dd@gmail.com</email>
+    <password>$2b$10$jfp0xobHucG1qOzkFs1re.paKFPBTygNVGJhJRK5TtLG.uzhQyfmS</password>
+  </user>
+  <user>
+    <name>ee</name>
+    <email>ee@gmail.com</email>
+    <password>$2b$10$e8vQn5WnPaQKZOHm.zpGbeeZHSEoEbYNeNB4y.QHtc.YvHQ3gB2Fy</password>
+  </user>
+</users>

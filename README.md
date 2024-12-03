@@ -9,5 +9,7 @@ Node.js and Express is used to create the routes for backend, which will be send
 
 HTML, JS and CSS technologies are used for the client-side interface of the project.
 
+To run this file locally, open cmd in backend foler and run the "npm start".
 
-
+URL of this project -  https://event-app-one-theta.vercel.app
+web service url - https://event-app-42f6.onrender.com

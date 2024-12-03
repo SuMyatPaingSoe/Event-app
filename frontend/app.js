@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000';
+const baseURL = 'https://event-app-42f6.onrender.com';
 
 // Function to update the calendar UI with the events
 async function updateCalendarUI(xmlString) {
